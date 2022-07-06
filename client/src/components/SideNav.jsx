@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import '../App.css';
 
 const navData = [
@@ -11,14 +10,19 @@ const navData = [
 export const SideNav = () => {
     return (
         <div className='sideNav'> 
-            <div className='d-flex flex-column'>       
+            <div className='d-flex flex-column'>     
                 {navData.map(page => {
                     return (     
-                        <Link to={page.link}><div className='rowLink'>{page.title}</div></Link>         
+                        <div onClick={() => {window.location.pathname = page.link}}>
+                            <div className='rowLink' id={window.location.pathname === page.link ? 'active' : ''}>
+                                {page.title}
+                            </div>
+                        </div>        
                     );
-                })}             
-            </div>   
+                })} 
+            </div>  
+            <img src='/planeLogo.png'  alt='Flight logo' /> 
             <h3 id="footer" className='text-white mb-5'>FlightStorm</h3>
-        </div>
+        </div> 
     );
 }
