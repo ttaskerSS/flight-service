@@ -27,7 +27,7 @@ export const UpdateFlightForm = () => {
         document.getElementById('ArrAir').value = flight.data[0].arrivalAirport;
         document.getElementById('PassNum').value = flight.data[0].numPassengers;
         document.getElementById('PassLim').value = flight.data[0].passengerLimit; 
-    }
+    } 
 
     const handleSubmit = async (event) => {
         event.preventDefault(); 
