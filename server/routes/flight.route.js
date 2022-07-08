@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 router.get('/:flightNumber', async (req, res) => {
     const flight = await getFlight(req.params.flightNumber); 
     res.json(flight);
-});
+}); 
 
 router.put('/:id', async (req, res) => {
     await updateFlight(req);  
@@ -25,5 +25,5 @@ router.delete('/:flightNumber', async (req, res) => {
     await deleteFlight(req.params.flightNumber); 
     res.send('flight deleted');
 });
-
+ 
 module.exports = router;
