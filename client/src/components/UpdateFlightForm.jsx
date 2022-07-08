@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css'; 
 
@@ -14,7 +13,6 @@ export const UpdateFlightForm = () => {
     const numPassRef = useRef();
     const passLimRef = useRef();
     const query = useRef();
-    const navigate = useNavigate();
 
     const autoFill = async () => {
         const flightNumQuery = query.current.value;
@@ -33,6 +31,10 @@ export const UpdateFlightForm = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault(); 
+        if (parseInt(document.getElementById('PassNum').value) > parseInt(document.getElementById('PassLim').value)) {
+            alert("Passenger number must not exceed passenger limit");
+            return;
+        }
         try {
             const flightNumQuery = query.current.value;
             const flight = await axios.get('http://localhost:8085/flights/' + flightNumQuery);
@@ -43,7 +45,6 @@ export const UpdateFlightForm = () => {
                               arrivalTime: arrTimeRef.current.value, departureAirport: depAirRef.current.value, 
                               arrivalAirport: arrAirRef.current.value, numPassengers: numPassRef.current.value,
                               passengerLimit: passLimRef.current.value }); 
-            navigate('../', {replace: true});
         } catch (error) {
             console.error(error);
         }
@@ -73,11 +74,11 @@ export const UpdateFlightForm = () => {
                     </div>
                     <div className="col">
                         <label for="inputDepDate">Departure Date</label>
-                        <input type="text" id="DepDate" className="form-control w-75" placeholder="Departure date" ref={depDateRef} />
+                        <input type="date" id="DepDate" className="form-control w-75" placeholder="Departure date" ref={depDateRef} />
                     </div>
                     <div className="col">
                         <label for="inputArrDate">Arrival Date</label>
-                        <input type="text" id="ArrDate" className="form-control w-75" placeholder="Arrival date" ref={arrDateRef} />
+                        <input type="date" id="ArrDate" className="form-control w-75" placeholder="Arrival date" ref={arrDateRef} />
                     </div>
                 </div>
                 <div className="form-row mt-3">
@@ -101,11 +102,11 @@ export const UpdateFlightForm = () => {
                     </div> 
                     <div className="col">
                         <label for="inputDepAirport">Departure Airport</label>
-                        <input type="text" id="DepAir" className="form-control w-75" placeholder="Departure airport" ref={depAirRef} />
+                        <input type="text" id="DepAir" className="form-control w-75" placeholder="Departure airport code" ref={depAirRef} />
                     </div> 
                     <div className="col">
                         <label for="inputArrAirport">Arrival Airport</label>
-                        <input type="text" id="ArrAir" className="form-control w-75" placeholder="Arrival airport" ref={arrAirRef} />
+                        <input type="text" id="ArrAir" className="form-control w-75" placeholder="Arrival airport code" ref={arrAirRef} />
                     </div> 
                 </div>
                 <button type="submit" className="btn btn-primary mt-4">Update</button>
