@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css'; 
 
@@ -14,7 +13,6 @@ export const DeleteFlightForm = () => {
     const numPassRef = useRef();
     const passLimRef = useRef();
     const query = useRef();
-    const navigate = useNavigate();
 
     const autoFill = async () => {
         const flightNumQuery = query.current.value;
@@ -42,7 +40,6 @@ export const DeleteFlightForm = () => {
                               arrivalTime: arrTimeRef.current.value, departureAirport: depAirRef.current.value, 
                               arrivalAirport: arrAirRef.current.value, numPassengers: numPassRef.current.value,
                               passengerLimit: passLimRef.current.value }); 
-            navigate('../', {replace: true});
         } catch (error) {
             console.error(error);
         }
@@ -73,11 +70,11 @@ export const DeleteFlightForm = () => {
                         </div>
                         <div className="col">
                             <label for="inputDepDate">Departure Date</label>
-                            <input type="text" id="DepDate" className="form-control w-75" placeholder="Departure date" ref={depDateRef} />
+                            <input type="date" id="DepDate" className="form-control w-75" placeholder="Departure date" ref={depDateRef} />
                         </div>
                         <div className="col">
                             <label for="inputArrDate">Arrival Date</label>
-                            <input type="text" id="ArrDate" className="form-control w-75" placeholder="Arrival date" ref={arrDateRef} />
+                            <input type="date" id="ArrDate" className="form-control w-75" placeholder="Arrival date" ref={arrDateRef} />
                         </div>
                     </div>
                     <div className="form-row mt-3">
