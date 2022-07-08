@@ -33,7 +33,7 @@ export const DeleteFlightForm = () => {
         event.preventDefault(); 
         try {
             const flightNumQuery = query.current.value;
-
+            
             await axios.delete('http://localhost:8085/flights/' + flightNumQuery, 
                             { flightNumber: flightNumRef.current.value, departureDate: depDateRef.current.value, 
                               arrivalDate: arrDateRef.current.value, departureTime: depTimeRef.current.value,
