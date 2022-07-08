@@ -23,16 +23,16 @@ const createFlight = async req => {
 }
 
 // Get flights
-const getAllFlights = async () => { 
+const getAllFlights = async () => {
     const flights = await Flight.find(); 
     return flights;
 }
 
-const getFlight = async flightNum => {
+const getFlight = async id => {
     try {
-        const flight = await Flight.find({ flightNumber: flightNum });
+        const flight = await Flight.find({ flightNumber: id });
         if (flight == null) {
-            throw `No flight with the flight number of ${flightNum} was found.`;
+            throw `No flight with the id of ${id} was found.`;
         }
         return flight;
     } catch (err) {
@@ -44,7 +44,7 @@ const getFlight = async flightNum => {
 // Update flights
 const updateFlight = async req => {
     try {
-        const updatedData = { 
+        const updatedData = {
             flightNumber: req.body.flightNumber,
             departureDate: req.body.departureDate,
             arrivalDate: req.body.arrivalDate,
@@ -63,9 +63,9 @@ const updateFlight = async req => {
 }
 
 // Delete flights
-const deleteFlight = async flightNum => {
+const deleteFlight = async id => {
     try {
-       await Flight.deleteOne({ flightNumber: flightNum });
+       await Flight.deleteOne({ flightNumber: id });
     } catch (err) {
         console.error(err);
         throw { status: 400, message: err };
